@@ -4,6 +4,8 @@ import { GitBody } from "../types";
 
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET!;
 
+console.log(`Initializing with secret: ${WEBHOOK_SECRET}`);
+
 if (!WEBHOOK_SECRET) {
   console.error("ERROR: Inform WEBHOOK_SECRET on .env");
   process.exit();
