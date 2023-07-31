@@ -4,7 +4,7 @@ Bem-vindo ao repositório do projeto PM2-CI-DI. Este projeto permite a criação
 
 ---
 
-### Arquivo .env
+## Arquivo .env
 
 Crie um arquivo .env na raiz do projeto e preencha com os seguintes dados:
 
