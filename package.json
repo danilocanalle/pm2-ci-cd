@@ -1,0 +1,20 @@
+{
+  "name": "pm2-ci-di",
+  "version": "1.0.0",
+  "description": "Projeto para CI/DI de aplicações rodando em pm2.",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "tsc",
+    "api": "npm run build && node dist/app.js"
+  },
+  "author": "Danilo Canalle",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
+  }
+}
