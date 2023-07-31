@@ -1,6 +1,6 @@
-# PM2-CI-DI
+# PM2-CI-CD
 
-Bem-vindo ao repositório do projeto PM2-CI-DI. Este projeto permite a criação de uma integração contínua e a implementação do pipeline entre o Github Webhooks e seu servidor linux. Este projeto foi projetado para ser simples, flexível e fácil de configurar.
+Bem-vindo ao repositório do projeto PM2-CI-CD. Este projeto permite a criação de uma integração contínua e a implementação do pipeline entre o Github Webhooks e seu servidor linux. Este projeto foi projetado para ser simples, flexível e fácil de configurar.
 
 ---
 
