@@ -106,5 +106,5 @@ Após cada operação, um arquivo log.txt será gerado na raiz da aplicação, c
 Para iniciar a aplicação, execute o seguinte comando:
 
 ```bash
-npm run api
+pm2 start npm --name pm2-ci-cd -- run api
 ```
