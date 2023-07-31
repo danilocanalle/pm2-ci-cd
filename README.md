@@ -18,7 +18,7 @@ WEBHOOK_SECRET=
 - **PORT:** a porta na qual o servidor deve escutar.
 - **WEBHOOK_SECRET:** sua chave secreta para a validação do webhook.
 
-### Arquivo repositories.json
+## Arquivo repositories.json
 
 Você deve ter um arquivo repositories.json na raiz do seu projeto. Ele deve ser uma lista de repositórios com o seguinte formato:
 
@@ -55,11 +55,11 @@ Por exemplo, a seguinte configuração monitorará o repositório danilocanalle,
 
 Isso permite uma maior flexibilidade no controle do processo de deploy, pois agora você pode decidir se deseja ou não fazer o deploy de cada push individualmente.
 
-### Logs
+## Logs
 
 Após cada operação, um arquivo log.txt será gerado na raiz da aplicação, contendo todos os logs de erros e sucessos. Ele pode ser usado para depuração e acompanhamento do estado dos eventos do webhook.
 
-### Iniciando a Aplicação
+## Iniciando a Aplicação
 
 Para iniciar a aplicação, execute o seguinte comando:
 
