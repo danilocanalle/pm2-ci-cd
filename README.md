@@ -6,40 +6,40 @@ Bem-vindo ao repositório do projeto PM2-CI-CD. Este projeto permite a criação
 
 ## Configurações no GitHub
 
-### 1. Acesse o repositório no GitHub
+#### 1. Acesse o repositório no GitHub
 
 Acesse o repositório que você deseja configurar o webhook.
 
-### 2. Navegue até as configurações do repositório
+#### 2. Navegue até as configurações do repositório
 
 Clique na aba 'Settings' (Configurações) no menu superior.
 
-### 3. Selecione a opção 'Webhooks'
+#### 3. Selecione a opção 'Webhooks'
 
 No menu lateral esquerdo, clique em 'Webhooks'.
 
-### 4. Clique em 'Add webhook' (Adicionar webhook)
+#### 4. Clique em 'Add webhook' (Adicionar webhook)
 
 No canto superior direito da página de webhooks, você encontrará a opção 'Add webhook'. Clique nela.
 
-### 5. Insira a URL do seu servidor
+#### 5. Insira a URL do seu servidor
 
 No campo 'Payload URL', você deve inserir a URL do seu servidor que receberá as solicitações POST.
 Aqui deverá ter uma URL pública (nginx) apontando para esta API na rota /webhook.
 
-### 6. Content Type
+#### 6. Content Type
 
 Escolha application/json
 
-### 7. Secret
+#### 7. Secret
 
 Cria uma chave secreta que você irá colocar no seu arquivo .env.
 
-### 8. Selecione o tipo de evento
+#### 8. Selecione o tipo de evento
 
 Você pode escolher receber eventos de 'Just the push event'.
 
-### 9. Clique em 'Add webhook' (Adicionar webhook)
+#### 9. Clique em 'Add webhook' (Adicionar webhook)
 
 Por fim, clique no botão 'Add webhook' na parte inferior da página.
 Pronto! Você configurou com sucesso um webhook no GitHub.
