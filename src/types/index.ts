@@ -1,13 +1,15 @@
 export type Repository = {
   name: string;
-  allowedPushers: string[];
   commands: string[];
+  branches?: string[];
+  allowedPushers?: string[];
   skipFlag?: string;
 };
 
 export type GitBody = {
   repository: {
     name: string;
+    branch: string;
     private: string;
   };
   pusher: {

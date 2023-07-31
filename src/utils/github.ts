@@ -25,6 +25,7 @@ export function parseBody(req: Request): GitBody {
   return {
     repository: {
       name: body.repository.name,
+      branch: body.ref.split("/").pop(),
       private: body.repository.private,
     },
     pusher: body.pusher,

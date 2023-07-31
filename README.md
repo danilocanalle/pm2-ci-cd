@@ -68,8 +68,9 @@ Você deve ter um arquivo repositories.json na raiz do seu projeto. Ele deve ser
 [
   {
     "name": "nome-do-repositorio",
-    "allowedPushers": ["email@provedor.com"],
     "commands": ["comando1", "comando2", "comando3"],
+    "branches": ["main"],
+    "allowedPushers": ["email@provedor.com"],
     "skipFlag": "FLAG"
   }
 ]
@@ -78,8 +79,9 @@ Você deve ter um arquivo repositories.json na raiz do seu projeto. Ele deve ser
 #### Onde:
 
 - **name:** é o nome do repositório que você deseja monitorar.
-- **allowedPushers:** é uma lista dos endereços de e-mail das pessoas que poderão realizar o auto-deploy.
 - **commands:** são os comandos que você deseja executar após cada push no repositório.
+- **branches:** os branches que deseja que o deploy seja aplicado.
+- **allowedPushers:** é uma lista dos endereços de e-mail das pessoas que poderão realizar o auto-deploy.
 - **skipFlag:** é uma string que, se encontrada no início da mensagem de commit, irá fazer com que o deploy seja ignorado para esse push.
 
 Por exemplo, a seguinte configuração monitorará o repositório danilocanalle, permitirá pushs apenas de danilo@mundialeditora.com, executará os comandos ls, mkdir teste, dirrr após cada push, e ignorará o deploy se a mensagem de commit contiver [CI Skip]:
@@ -88,8 +90,9 @@ Por exemplo, a seguinte configuração monitorará o repositório danilocanalle,
 [
   {
     "name": "danilocanalle",
-    "allowedPushers": ["danilo@bookplay.com.br"],
     "commands": ["ls", "mkdir test"],
+    "branches": ["main"],
+    "allowedPushers": ["danilo@bookplay.com.br"],
     "skipFlag": "[CI Skip]"
   }
 ]

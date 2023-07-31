@@ -15,7 +15,7 @@ const validateGitHook = (req: Request, res: Response, next: NextFunction) => {
   return next();
 };
 
-const validateUserPermission = (
+const validateRepository = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -32,16 +32,52 @@ const validateUserPermission = (
       .send(`Repository [${parsedBody.repository.name}] not listed.`);
   }
 
-  const userAllowed = repo.allowedPushers.find(
-    (user) => user === parsedBody.pusher.email
-  );
+  return next();
+};
 
-  if (!userAllowed) {
-    saveLog(`User [${parsedBody.pusher.email}] not allowed to push.`);
+const validateUserPermission = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const parsedBody = parseBody(req);
 
-    return res
-      .status(422)
-      .send(`User [${parsedBody.pusher.email}] not allowed to push.`);
+  const repo = repos.find((repo) => repo.name === parsedBody.repository.name);
+
+  if (repo?.allowedPushers) {
+    const userAllowed = repo.allowedPushers.find(
+      (user) => user === parsedBody.pusher.email
+    );
+
+    if (!userAllowed) {
+      saveLog(`User [${parsedBody.pusher.email}] not allowed to push.`);
+
+      return res
+        .status(422)
+        .send(`User [${parsedBody.pusher.email}] not allowed to push.`);
+    }
+  }
+
+  return next();
+};
+
+const validateBranches = (req: Request, res: Response, next: NextFunction) => {
+  const parsedBody = parseBody(req);
+
+  const repo = repos.find((repo) => repo.name === parsedBody.repository.name);
+
+  if (repo?.branches) {
+    if (
+      !repo.branches.find((branch) => branch === parsedBody.repository.branch)
+    ) {
+      saveLog(
+        `CI/DI ignored on repository [${parsedBody.repository.name}] on branch [${parsedBody.repository.branch}]`
+      );
+
+      return res.status(200).json({
+        message: `CI/DI ignored on repository [${parsedBody.repository.name}] on branch [${parsedBody.repository.branch}]`,
+      });
+    }
   }
 
   return next();
@@ -66,7 +102,9 @@ const validateSkipFlags = (req: Request, res: Response, next: NextFunction) => {
 };
 
 router.use(validateGitHook);
+router.use(validateRepository);
 router.use(validateUserPermission);
+router.use(validateBranches);
 router.use(validateSkipFlags);
 
 router.post("/webhook", (req: Request, res: Response) => {
