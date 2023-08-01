@@ -12,9 +12,14 @@ if (!WEBHOOK_SECRET) {
 }
 
 export function verify_signature(req: Request) {
+  console.log(req.body);
+
   const signature = createHmac("sha256", WEBHOOK_SECRET)
     .update(JSON.stringify(req.body))
     .digest("hex");
+
+  console.log("----");
+  console.log(req.headers["X-Hub-Signature-256"]);
 
   return `sha256=${signature}` === req.headers["X-Hub-Signature-256"];
 }

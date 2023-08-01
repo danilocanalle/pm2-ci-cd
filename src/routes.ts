@@ -20,8 +20,6 @@ const validateGitHookPing = (
 };
 
 const validateGitHook = (req: Request, res: Response, next: NextFunction) => {
-  console.log(req);
-
   if (!verify_signature(req)) {
     res.status(401).send("Unauthorized");
     return;
