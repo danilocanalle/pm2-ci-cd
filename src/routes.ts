@@ -6,6 +6,15 @@ import { runCommandsInOrder } from "./utils/cmd";
 
 const router = Router();
 
+const validateHookPing = (req: Request, res: Response, next: NextFunction) => {
+  if (req.body.zen) {
+    saveLog("Webhook validated successfully.");
+    return res.status(200).json({ ping: true });
+  }
+
+  return next();
+};
+
 const validateGitHook = (req: Request, res: Response, next: NextFunction) => {
   if (!verify_signature(req)) {
     res.status(401).send("Unauthorized");
@@ -101,6 +110,7 @@ const validateSkipFlags = (req: Request, res: Response, next: NextFunction) => {
   return next();
 };
 
+router.use(validateHookPing);
 router.use(validateGitHook);
 router.use(validateRepository);
 router.use(validateUserPermission);
