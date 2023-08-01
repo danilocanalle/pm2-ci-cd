@@ -19,9 +19,9 @@ export function verify_signature(req: Request) {
     .digest("hex");
 
   console.log("----");
-  console.log(req.headers["X-Hub-Signature-256"]);
+  console.log(req.headers["x-hub-signature-256"]);
 
-  return `sha256=${signature}` === req.headers["X-Hub-Signature-256"];
+  return `sha256=${signature}` === req.headers["x-hub-signature-256"];
 }
 
 export function parseBody(req: Request): GitBody {
