@@ -12,7 +12,8 @@ const validateGitHookPing = (
   next: NextFunction
 ) => {
   if (req.body.zen) {
-    saveLog("Webhook validated successfully.");
+    const repo = req.body.repository.name;
+    saveLog(`Webhook on repository [${repo}] validated successfully.`);
     return res.status(200).json({ ping: true });
   }
 
