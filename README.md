@@ -44,7 +44,7 @@ Você pode escolher receber eventos de 'Just the push event'.
 Por fim, clique no botão 'Add webhook' na parte inferior da página.
 Pronto! Você configurou com sucesso um webhook no GitHub.
 
-## Configurações no Servidor Linux
+## Configurações no Servidor
 
 Para persistir a senha do Github no servidor:
 
@@ -56,7 +56,7 @@ Para persistir a senha do Github no servidor:
 git config credential.helper store
 ```
 
-- Pronto, a senha ficará salva para realizar o pull automático.
+- Pronto, a senha ficará gravada para realizar o pull automático.
 
 ---
 
