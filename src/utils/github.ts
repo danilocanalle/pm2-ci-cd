@@ -21,7 +21,6 @@ export function verify_signature(req: Request) {
 
 export function parseBody(req: Request): GitBody {
   const body = req.body;
-  console.log(body);
 
   return {
     repository: {
