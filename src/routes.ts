@@ -90,7 +90,7 @@ const validateBranches = (req: Request, res: Response, next: NextFunction) => {
         !repo.branches || repo.branches.includes(parsedBody.repository.branch)
     );
 
-  if (!repo) {
+  if (repo !== -1) {
     saveLog(
       `CI/DI ignored on repository [${parsedBody.repository.name}] on branch [${parsedBody.repository.branch}]`
     );
