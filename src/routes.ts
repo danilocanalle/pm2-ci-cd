@@ -106,7 +106,12 @@ const validateBranches = (req: Request, res: Response, next: NextFunction) => {
 const validateSkipFlags = (req: Request, res: Response, next: NextFunction) => {
   const parsedBody = parseBody(req);
 
-  const repo = repos.find((repo) => repo.name === parsedBody.repository.name);
+  const repo = repos
+    .filter((repo) => repo.name === parsedBody.repository.name)
+    .find(
+      (repo) =>
+        !repo.branches || repo.branches.includes(parsedBody.repository.branch)
+    );
 
   if (repo?.skipFlag) {
     if (parsedBody.message.startsWith(repo.skipFlag)) {
@@ -135,7 +140,13 @@ router.post("/webhook", (req: Request, res: Response) => {
     `Updating repository [${parsedBody.repository.name}] by user [${parsedBody.pusher.email}].`
   );
 
-  const repo = repos.find((repo) => repo.name === parsedBody.repository.name);
+  const repo = repos
+    .filter((repo) => repo.name === parsedBody.repository.name)
+    .find(
+      (repo) =>
+        !repo.branches || repo.branches.includes(parsedBody.repository.branch)
+    );
+
   if (repo) {
     const commands = repo.commands;
 
