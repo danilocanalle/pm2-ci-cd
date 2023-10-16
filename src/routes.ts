@@ -56,7 +56,12 @@ const validateUserPermission = (
 ) => {
   const parsedBody = parseBody(req);
 
-  const repo = repos.find((repo) => repo.name === parsedBody.repository.name);
+  const repo = repos
+    .filter((repo) => repo.name === parsedBody.repository.name)
+    .find(
+      (repo) =>
+        !repo.branches || repo.branches.includes(parsedBody.repository.branch)
+    );
 
   if (repo?.allowedPushers) {
     const userAllowed = repo.allowedPushers.find(
@@ -78,20 +83,21 @@ const validateUserPermission = (
 const validateBranches = (req: Request, res: Response, next: NextFunction) => {
   const parsedBody = parseBody(req);
 
-  const repo = repos.find((repo) => repo.name === parsedBody.repository.name);
+  const repo = repos
+    .filter((repo) => repo.name === parsedBody.repository.name)
+    .findIndex(
+      (repo) =>
+        !repo.branches || repo.branches.includes(parsedBody.repository.branch)
+    );
 
-  if (repo?.branches) {
-    if (
-      !repo.branches.find((branch) => branch === parsedBody.repository.branch)
-    ) {
-      saveLog(
-        `CI/DI ignored on repository [${parsedBody.repository.name}] on branch [${parsedBody.repository.branch}]`
-      );
+  if (!repo) {
+    saveLog(
+      `CI/DI ignored on repository [${parsedBody.repository.name}] on branch [${parsedBody.repository.branch}]`
+    );
 
-      return res.status(200).json({
-        message: `CI/DI ignored on repository [${parsedBody.repository.name}] on branch [${parsedBody.repository.branch}]`,
-      });
-    }
+    return res.status(200).json({
+      message: `CI/DI ignored on repository [${parsedBody.repository.name}] on branch [${parsedBody.repository.branch}]`,
+    });
   }
 
   return next();
