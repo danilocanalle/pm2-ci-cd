@@ -1,10 +1,13 @@
 import { spawn, ChildProcessWithoutNullStreams } from "child_process";
 import { saveLog } from "./logger";
 
-function runCommand(command: string): Promise<void> {
+function runCommand(command: string, cwd?: string): Promise<void> {
+  console.log(command, cwd);
+
   return new Promise<void>((resolve, reject) => {
     const child: ChildProcessWithoutNullStreams = spawn(command, [], {
       shell: true,
+      cwd,
     });
 
     child.on("error", (error: Error) => {
@@ -23,10 +26,13 @@ function runCommand(command: string): Promise<void> {
   });
 }
 
-export async function runCommandsInOrder(commands: string[]): Promise<void> {
+export async function runCommandsInOrder(
+  commands: string[],
+  cwd?: string
+): Promise<void> {
   for (const command of commands) {
     try {
-      await runCommand(command);
+      await runCommand(command, cwd);
       saveLog(`Command "${command}" completed successfully.`);
     } catch (error) {
       saveLog(`Command "${command}" failed with error: ${error}`);

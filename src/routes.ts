@@ -149,8 +149,9 @@ router.post("/webhook", (req: Request, res: Response) => {
 
   if (repo) {
     const commands = repo.commands;
+    const cwd = repo?.cwd;
 
-    runCommandsInOrder(commands);
+    runCommandsInOrder(commands, cwd);
   }
 
   return res.status(200).json({ message: "CI/DI successfully ran." });

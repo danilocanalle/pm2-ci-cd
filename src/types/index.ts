@@ -1,6 +1,7 @@
 export type Repository = {
   name: string;
   commands: string[];
+  cwd?: string;
   branches?: string[];
   allowedPushers?: string[];
   skipFlag?: string;

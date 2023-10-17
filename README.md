@@ -83,6 +83,7 @@ Você deve ter um arquivo repositories.json na raiz do seu projeto. Ele deve ser
   {
     "name": "nome-do-repositorio",
     "commands": ["comando1", "comando2", "comando3"],
+    "cwd": "./",
     "branches": ["main"],
     "allowedPushers": ["email@provedor.com"],
     "skipFlag": "FLAG"
@@ -94,6 +95,7 @@ Você deve ter um arquivo repositories.json na raiz do seu projeto. Ele deve ser
 
 - **name:** é o nome do repositório que você deseja monitorar.
 - **commands:** são os comandos que você deseja executar após cada push no repositório.
+- **cwd:** poderá definir a pasta na qual os scripts irão rodar.
 - **branches:** os branches que deseja que o deploy seja aplicado.
 - **allowedPushers:** é uma lista dos endereços de e-mail das pessoas que poderão realizar o auto-deploy.
 - **skipFlag:** é uma string que, se encontrada no início da mensagem de commit, irá fazer com que o deploy seja ignorado para esse push.
