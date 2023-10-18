@@ -140,19 +140,19 @@ router.post("/webhook", (req: Request, res: Response) => {
     `Updating repository [${parsedBody.repository.name}] by user [${parsedBody.pusher.email}].`
   );
 
-  const repo = repos
+  const filtered = repos
     .filter((repo) => repo.name === parsedBody.repository.name)
-    .find(
+    .filter(
       (repo) =>
         !repo.branches || repo.branches.includes(parsedBody.repository.branch)
     );
 
-  if (repo) {
+  filtered.forEach(async (repo) => {
     const commands = repo.commands;
     const cwd = repo?.cwd;
 
-    runCommandsInOrder(commands, cwd);
-  }
+    await runCommandsInOrder(commands, cwd);
+  });
 
   return res.status(200).json({ message: "CI/DI successfully ran." });
 });
