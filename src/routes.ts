@@ -148,6 +148,8 @@ router.post("/webhook", (req: Request, res: Response) => {
     );
 
   filtered.forEach(async (repo) => {
+    console.log(repo.name, repo.commands);
+
     const commands = repo.commands;
     const cwd = repo?.cwd;
 
