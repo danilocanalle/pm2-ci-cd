@@ -7,6 +7,7 @@ function runCommand(command: string, cwd?: string): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     const child: ChildProcessWithoutNullStreams = spawn(command, [], {
       shell: true,
+      env: {},
       cwd,
     });
 
