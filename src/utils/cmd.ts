@@ -11,6 +11,20 @@ function runCommand(command: string, cwd?: string): Promise<void> {
       cwd,
     });
 
+    // Captura stdout
+    child.stdout.on("data", (data: Buffer) => {
+      const output = data.toString();
+      console.log(output);
+      saveLog(output);
+    });
+
+    // Captura stderr
+    child.stderr.on("data", (data: Buffer) => {
+      const error = data.toString();
+      console.error(error);
+      saveLog(`ERROR: ${error}`);
+    });
+
     child.on("error", (error: Error) => {
       reject(error.message);
     });
